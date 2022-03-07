@@ -2,7 +2,11 @@ package rocks.zipcodewilmington;
 
 import org.junit.Assert;
 import org.junit.Test;
+import rocks.zipcodewilmington.animals.Animal;
 import rocks.zipcodewilmington.animals.Dog;
+import rocks.zipcodewilmington.animals.Mammal;
+
+import java.util.Date;
 
 /**
  * @author leon on 4/19/18.
@@ -28,4 +32,47 @@ public class DogTest {
         String dogName = dog.getName();
         Assert.assertEquals(dogName, givenName);
     }
+    @Test
+    public void setBirthDate() {
+        Dog dog = new Dog(null,null,null);
+
+        Date date = new Date();
+        dog.setBirthDate(date);
+
+        Assert.assertEquals(date,dog.getBirthDate());
+
+    }
+    @Test
+    public void speak(){
+        Dog dog = new Dog(null,null,null);
+
+        String expected = "bark!";
+
+        Assert.assertEquals(expected,dog.speak());
+
+    }
+    @Test
+    public void eatTest(){
+        Dog dog = new Dog(null,null,null);
+
+        Integer expected = 1;
+
+        Food food = new Food();
+
+        dog.eat(food);
+
+        Assert.assertEquals(expected,dog.getNumberOfMealsEaten());
+    }
+    @Test
+    public void animalInheritance(){
+        Dog dog = new Dog("milo",new Date(),0);
+
+        Assert.assertTrue(dog instanceof Animal);
+    }
+    @Test
+    public void mammalInheritance(){
+        Dog dog = new Dog("milo",new Date(),0);
+        Assert.assertTrue(dog instanceof Mammal);
+    }
+
 }

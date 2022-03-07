@@ -35,81 +35,90 @@ public class DogHouseTest {
 
     //Create tests for `void add(Dog)`
     @Test
-    public void add() {
-        // Given
-        Dog dog1 = new Dog("Rocky", new Date(), 1);
+
+    public void addDogTest(){
+        //Given
+        String name = "milo";
+        Date date = new Date();
+        DogHouse.clear();
+
+        //When
+        Dog dog = AnimalFactory.createDog(name,date);
+        DogHouse.add(dog);
+        Dog dog1 = AnimalFactory.createDog(name,date);
         DogHouse.add(dog1);
-
-        // When
-        Dog expected = dog1;
-
-        // Then
         Dog actual = DogHouse.getDogById(1);
-        Assert.assertEquals(expected, actual);
+
+        //Then
+
+        Assert.assertEquals(actual,dog1);
+    }
+    @Test
+    public void removeDog(){
+        String name = "milo";
+        Date date = new Date();
+        DogHouse.clear();
+
+        //When
+        Dog dog = AnimalFactory.createDog(name,date);
+        DogHouse.add(dog);
+        Dog dog1 = AnimalFactory.createDog(name,date);
+        DogHouse.add(dog1);
+        DogHouse.remove(dog);
+        Dog actual = DogHouse.getDogById(0);
+
+        Assert.assertTrue(actual == null);
 
     }
-
-    // Create tests for `void remove(Integer id)`
     @Test
-    public void remove() {
-        // Given
-        String expectedName = "";
-        Date expectedBirthDate = new Date();
-        Integer expectedId = 3;
+    public void removeIntDog(){
+        String name = "milo";
+        Date date = new Date();
+        DogHouse.clear();
 
+        //When
+        Dog dog = AnimalFactory.createDog(name,date);
+        DogHouse.add(dog);
+        Dog dog1 = AnimalFactory.createDog(name,date);
+        DogHouse.add(dog1);
+        DogHouse.remove(0);
+        Dog actual = DogHouse.getDogById(0);
 
-        // When
-        Dog actualDog = new Dog(expectedName, expectedBirthDate, expectedId);
-        DogHouse.add(actualDog);
-        Dog expectedDog = DogHouse.getDogById(3);
-        DogHouse.remove(3);
-
-        // Then
-
-        Assert.assertEquals(expectedDog, actualDog);
-    }
-
-    //Create tests for `Cat getCatById(Integer id)`
-
-    @Test
-    public void getDogIdTest() {
-
-        // Given
-        String expectedName = " Pepper";
-        Date expectedBirthDate = new Date();
-        Integer expectedId = 4;
-
-
-        // When
-        Dog actualDog = new Dog(expectedName, expectedBirthDate, expectedId);
-        DogHouse.add(actualDog);
-        Dog expectedDog = DogHouse.getDogById(4);
-
-
-        // Then
-        Assert.assertEquals(expectedDog, actualDog);
+        Assert.assertTrue(actual == null);
 
     }
-
-
-    // Create tests for Integer getNumberOfDogs
-
     @Test
-    public void getNumberofDogsTest() {
-        String expectedName = "";
-        Date expectedBirthDate = new Date();
-        Integer expectedId = 0;
+    public void getDogByIdTest(){
 
+        String name = "milo";
+        Date date = new Date();
+        DogHouse.clear();
 
-        // When
-        Dog actualDog = new Dog(expectedName, expectedBirthDate, expectedId);
-        Integer actualDogs = 2;
-        DogHouse.add(actualDog);
-        Integer expectedDogs = DogHouse.getNumberOfDogs();
+        //When
+        Dog dog = AnimalFactory.createDog(name,date);
+        DogHouse.add(dog);
+        Dog dog1 = AnimalFactory.createDog(name,date);
+        DogHouse.add(dog1);
+        Dog actual = DogHouse.getDogById(0);
 
+        Assert.assertTrue(actual == dog);
 
-        // Then
-        Assert.assertEquals(expectedDogs, actualDogs);
+    }
+    @Test
+    public void getNumberOfDogTest(){
+
+        String name = "milo";
+        Date date = new Date();
+        DogHouse.clear();
+
+        //When
+        Dog dog = AnimalFactory.createDog(name,date);
+        DogHouse.add(dog);
+        Dog dog1 = AnimalFactory.createDog(name,date);
+        DogHouse.add(dog1);
+        Integer actual = DogHouse.getNumberOfDogs();
+
+        Assert.assertTrue(actual == 2);
 
     }
 }
